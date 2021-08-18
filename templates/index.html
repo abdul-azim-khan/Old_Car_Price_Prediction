@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Car Price Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+  <style>
+  select,input,label{
+    display:table-cell;
+    vertical-align: middle;
+    height: 50%;
+   
+}
+
+select,input{
+  border: 3px rgb(95, 92, 92);
+    border-style:solid ;
+    border-radius: 5px;
+    width: 50%;
+}
+
+select:hover,input:hover{
+    background-color: rgb(11, 41, 105);
+    border: white 3px;
+    
+    border-style:solid;
+  }
+
+body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+  }
+
+  .inputs{
+ 
+    width: 50%;
+    border: 15px solid green;
+    padding: 10px;
+    margin: 20px;
+  }
+  p {font-size: 16px;}
+  
+.dropdown{
+  width: 50%;
+  border: 15px solid green;
+  padding: 10px;
+  margin: 20px;
+  
+}
+
+  h2{
+    font-weight: bolder;
+    text-align: center;
+  }
+
+  .margin {margin-bottom: 45px;}
+
+  .bg-1 { 
+    background-color:black ; /* Green */
+    
+    color: white;
+    text-align: left;
+
+  }
+  .row{
+    background-image: url("https://media.giphy.com/media/xUPGcshrKRahaS8ef6/giphy.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+
+  }
+  .bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+  .bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+  }
+  .bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+  }
+  .container-fluid {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .news_content{
+    margin-top: 10px;
+    font-size: 1.2em;
+  }
+
+  .col-md-8{
+    text-align: center;
+    color: rgb(247, 243, 243);
+    text-shadow: 2px;
+    font-weight: bold;
+  }
+
+  .btn{
+    background-color: rgb(66, 12, 167);
+    margin:auto;
+    width: 50%;
+    margin-left:25%;
+    border: 6px rgb(95, 92, 92);
+    border-style:solid ;
+    border-radius: 5px;
+    font-size: 1.2em;
+    display:inline;
+  }
+
+  .btn:hover{
+    background-color: rgb(11, 41, 105);
+    border: white 6px;
+    
+    border-style:solid;
+  }
+  
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }
+  .navbar-header{
+    min-width: 100%;
+  }
+
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default bg-4">
+  <div class="container">
+    <div class="navbar-header">
+      
+      <h2>Car Price Prediction</h2>
+    </div>
+    
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8"><p>This intelligent system is able to predict The car resale price based on it's parameters</p></div>
+    
+    <div class="col-md-2"></div>
+    <h3 style="margin: 5px 20% 5px 35%;font-weight: bolder;">{{ prediction_text }}</h3>
+  </div>
+  
+  <div  class="row">
+    <div class="col-md-4"></div>
+    <div style="width: 100%;position: relative;" class="col-md-4">
+  <form action="{{ url_for('predict')}}"method="post">
+    <!-- <div class="form-group">
+      <label class="news_content" for="tv">News Content...</label>
+      <textarea class="form-control"  name="news" id="news" rows="8" placeholder="Enter news content" required="required"></textarea>
+       <input type="text" class="form-control" name="news" id="news" placeholder="News content" required="required"> -->
+    <!-- </div> --> 
+    <div style="display: flex;">
+     <div class="inputs" >
+       <div><label for="age">Age:</label>
+       <input style="background-color: rgb(167, 151, 196);" type="number"  id="age" name="age"  placeholder="Enter Age" required="required"></div>
+       <div><label for="run">KMs Driven:</label>
+       <input style="background-color: rgb(167, 151, 196);" type="number" id="run" name="run"  placeholder="Enter KMs Run" required="required"></div>
+       <div><label for="tax">Tax in $:</label>
+       <input style="background-color: rgb(167, 151, 196);" type="number"  id="tax" name="tax"  placeholder="Enter Tax" required="required"></div>
+       <div><label for="mpg">MPG:</label>
+       <input style="background-color: rgb(167, 151, 196);" type="number" id="mpg" name="mpg"  placeholder="Enter Miles per Gallon" required="required"></div>
+       <div><label for="eng_size">Engine Size:</label>
+       <input style="background-color: rgb(167, 151, 196);" type="number" id="eng_size" name="eng_size"  placeholder="Enter Engine Size" required="required"></div>
+      </div>
+
+      <div class="dropdown">
+        <div style="align-self: center;"><label for="fuel">Choose Fuel Type:</label>
+
+        <select name ="fuelType" class="fuel" id="fuel" style="background-color: rgb(167, 151, 196);" >
+        <option value="diesel" >Diesel</option>
+        <option value="petrol" >Petrol</option>
+        <option value="other" >Other</option>
+        <option value="hybrid" >Hybrid</option>
+        </select></div>
+
+        <div><label for="transmission">Transmission:</label>
+
+        <select name="transmission" class="transmission" id="transmission" style="background-color: rgb(167, 151, 196);" name="fuel" id="fuel">
+        <option value="automaic" id="automaic" name="automaic">Automatic</option>
+        <option value="manual" id="manual" name="manual">Manual</option>
+        <option value="semi-auto" id="semi-auto" name="semi-auto">Semi-Automatic</option>
+        </select></div>
+      </div>
+    </div>
+    
+
+    <div><button type="submit" class="btn btn-primary btn-block btn-large">Predict Price</button></div>
+  </form>
+  
+</div>
+<div class="col-md-4"></div>
+</div>
+</div>
+
+
+
+
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <!-- <p>Thanks to <a href=""></a></p> -->
+  <p class='footer-description'>Made with ❤️ by Abdul Azim Khan.</p>
+  <div class="contact" >
+    <a target="_blank" href="https://github.com/abdul-azim-khan/"><i class="fab fa-github fa-lg contact-icon" style="color:blanchedalmond !important"></i></a>
+    <a target="_blank" href="https://www.linkedin.com/in/abdul-azim-khan-274316168"><i class="fab fa-linkedin fa-lg contact-icon" style="color:blanchedalmond !important"></i></a>
+</div>
+   
+  
+</footer>
+
+</body>
+</html>
