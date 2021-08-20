@@ -8,7 +8,7 @@ model = pickle.load(open("dt.pickle","rb"))
 
 
 
-@app.route('/',methods=["GET","POST"])
+@app.route('/')
 def home():
     return render_template('index.html')
 
