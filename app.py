@@ -30,7 +30,7 @@ def predict():
     fuelType_Other =0
     fuelType_Petrol =0
 
-    if request.method == "GET"| "POST":
+    if request.method == "POST":
         age = int(request.form["age"])
         mileage = int(request.form["run"])
         tax = int(request.form["tax"])
