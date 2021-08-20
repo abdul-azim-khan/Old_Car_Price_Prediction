@@ -8,7 +8,7 @@ model = pickle.load(open("dt.pickle","rb"))
 
 
 
-@app.route('/')
+@app.route('/',,methods=["GET","POST"])
 def home():
     return render_template('index.html')
 
@@ -30,7 +30,7 @@ def predict():
     fuelType_Other =0
     fuelType_Petrol =0
 
-    if request.method == "POST":
+    if request.method == "GET"| "POST":
         age = int(request.form["age"])
         mileage = int(request.form["run"])
         tax = int(request.form["tax"])
